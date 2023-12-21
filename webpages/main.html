@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main Page - Wangige Market Stalls Allocation</title>
+    <link rel="stylesheet" type="text/css" href="styling.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+            
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="sign-up.html">Signup/Sign In</a></li>
+           
+            <li><a href="directions.html">Directions</a></li>
+            <li><a href="payment.html">Payment Processing</a></li>
+            <li><a href="contacts.html">Contact Us</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="learnmore.html">Learnmore</a></li>
+            
+        </ul>
+        </nav>
+    </header>
+
+    <section id="mainpage" class="content-section">
+        <h2>Main Page</h2>
+
+        <!-- Stall Selection Form -->
+        <form id="stallSelectionForm">
+            <label for="productCategory">Select Product Category:</label>
+            <select id="productCategory" name="productCategory" required>
+                <option value="fruits">Fruits</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="cereals">Cereals</option>
+            </select>
+
+            <label for="stallSize">Select Stall Size:</label>
+            <select id="stallSize" name="stallSize" required>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+            <button type="submit">Confirmation</button>
+            <button type="button" onclick="checkAvailability()">Check Availability</button>
+        </form>
+
+        <!-- Availability Status -->
+        <div id="availabilityStatus">
+            <!-- Status messages will be displayed here based on the backend logic -->
+        </div>
+    </section>
+
+    
+
+   
+    
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const stallSelectionForm = document.getElementById("stallSelectionForm");
+        const availabilityStatus = document.getElementById("availabilityStatus");
+        const checkAvailabilityBtn = document.getElementById("checkAvailabilityBtn");
+
+        stallSelectionForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            
+            const productCategory = document.getElementById("productCategory").value;
+            const stallSize = document.getElementById("stallSize").value;
+
+            
+            const availabilityResult = checkAvailability(productCategory, stallSize);
+
+           
+            displayResult(availabilityResult);
+            
+            
+            checkAvailabilityBtn.style.display = "block";
+
+           
+            setTimeout(() => {
+                availabilityStatus.innerHTML = "";
+
+                if (availabilityResult.includes("successfully")) {
+                    // Redirect to the payment page after a successful selection
+                    window.location.href = "payment.html";
+                }
+
+                
+            }, 5000);
+        });
+
+        checkAvailabilityBtn.addEventListener("click", () => {
+            
+            alert("Checking availability...");
+        });
+
+        function checkAvailability(productCategory, stallSize) {
+            // Total available stalls
+            const totalMediumStalls = 100;
+            const totalLargeStalls = 50;
+
+            
+            let cerealsStalls = 30;
+            let fruitsStalls = 50;
+            let vegetablesStalls = 70;
+
+            
+            if (stallSize === "medium" && totalMediumStalls > 0) {
+                return checkAndReduceStalls(productCategory, stallSize, cerealsStalls, fruitsStalls, vegetablesStalls);
+            } else if (stallSize === "large" && totalLargeStalls > 0) {
+                return checkAndReduceStalls(productCategory, stallSize, cerealsStalls, fruitsStalls, vegetablesStalls);
+            } else {
+                return "Not available. Kindly select another.";
+            }
+        }
+
+        function checkAndReduceStalls(productCategory, stallSize, cerealsStalls, fruitsStalls, vegetablesStalls) {
+            
+            if (productCategory === "cereals" && cerealsStalls > 0) {
+                cerealsStalls--;
+                return "Selected successfully! Please await further directions.";
+            } else if (productCategory === "fruits" && fruitsStalls > 0) {
+                fruitsStalls--;
+                return "Selected successfully! Please await further directions.";
+            } else if (productCategory === "vegetables" && vegetablesStalls > 0) {
+                vegetablesStalls--;
+                return "Selected successfully! Please await further directions.";
+                
+            } else {
+                return "Not available. Kindly select another.";
+            }
+        }
+
+        function displayResult(message) {
+            availabilityStatus.innerHTML = `<p style='color: ${message.includes("successfully") ? "green" : "red"};'>${message}</p>`;
+            window.location.href = "payment.html";
+        }
+    });
+</script>
+
+
+    
+</body>
+<footer>
+    <p>© 2023 Wangige Market Stalls Allocation. All rights reserved.</p>
+    <p>Designed by <a href="https://github.com/mosekyle/Market-Stall-Allocation-App">Moses Gitau</a></p>
+</footer>
+
+</html>
+
+
+
+
+

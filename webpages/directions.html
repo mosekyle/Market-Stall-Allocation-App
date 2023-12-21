@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embedded Map</title>
+  <link rel="stylesheet" type="text/css" href="styling.css">
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7ENwJIFCFWaRBoXU4naHdMfijy2jBwNY&callback=initMap" async defer></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="contacts.html">Contact Us</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="learnmore.html">Learnmore</a></li>
+                
+                
+            </ul>
+        </nav>
+    </header>
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      const mapOptions = {
+        center: { lat:  -1.220253 , lng: 36.713245 },
+        zoom: 12,
+      };
+      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    }
+  </script>
+</body>
+
+</html>

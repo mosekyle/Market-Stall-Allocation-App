@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Verification - Wangige Market Stalls Allocation</title>
+    <link rel="stylesheet" type="text/css" href="styling.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+              <li><a href="Home.html">Home</a></li>
+              <li><a href="sign-up.html">Signup/Sign In</a></li>
+              <li><a href="learnmore.html">Learn More</a></li>
+              
+            </ul>
+        </nav>
+    </header>
+
+    <section id="login-verification" class="content-section">
+        <h2>Login Verification</h2>
+        <p>Verify your identity to access your market stall information.</p>
+
+        <!-- Login verification form -->
+        <form id="loginVerificationForm">
+            <label for="verificationCode">Verification Code:</label>
+            <input type="text" id="verificationCode" name="verificationCode" required>
+
+            <button type="submit">Verify</button>
+          
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2023 Wangige Market Stalls Allocation. All rights reserved.</p>
+        <p>Designed by <a href="https://github.com/mosekyle/Market-Stall-Allocation-App">Moses Gitau</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginVerificationForm = document.getElementById("loginVerificationForm");
+
+            loginVerificationForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                // Get the verification code
+                const verificationCode = document.getElementById("verificationCode").value;
+
+                // Perform verification (you can replace this with your actual verification logic)
+                if (verifyUser(verificationCode)) {
+                    alert("Verification successful!");
+                    // Redirect to the home page after successful verification
+                    window.location.href = "home.html";
+                } else {
+                    alert("Invalid verification code. Please try again.");
+                }
+            });
+
+            // Replace this function with your actual verification logic
+            function verifyUser(verificationCode) {
+                // Your verification logic goes here
+                // Return true if verification is successful, false otherwise
+                // For example, you might compare the verification code with a stored code
+                return verificationCode === "1234"; // Replace with your actual code
+            }
+        });
+    </script>
+
+</body>
+
+</html>

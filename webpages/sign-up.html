@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Signup Form</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="wrapper">
+    <div class="form signup">
+      <header>Signup</header>
+      <form action="#" id="signup-form">
+        <input type="text" placeholder="Full name" id="signup-name" required />
+        <input type="text" placeholder="Email address" id="signup-email" required />
+        <input type="password" placeholder="Password" id="signup-password" required />
+        <div class="checkbox">
+          <input type="checkbox" id="signupCheck" />
+          <label for="signupCheck">I accept all terms & conditions</label>
+        </div>
+        <input type="submit" value="Signup" />
+      </form>
+    </div>
+    <div class="bottom-link">
+      Already have an account? 
+      <a href="#" id="login-link">Login</a>
+    </div>
+    <div class="form login">
+      <header>Login</header>
+      <form action="#" id="login-form">
+        <input type="text" placeholder="Email address" id="login-email" required />
+        <input type="password" placeholder="Password" id="login-password" required />
+        <a href="#">Forgot password?</a>
+        <input type="submit" value="Login" />
+      </form>
+      <form action="/submit_form" method="post">
+        <!-- Your form fields go here -->
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const wrapper = document.querySelector(".wrapper"),
+        signupHeader = document.querySelector(".signup header"),
+        loginHeader = document.querySelector(".login header"),
+        loginForm = document.getElementById("login-form"),
+        signupForm = document.getElementById("signup-form"),
+        users = [];
+
+      loginHeader.addEventListener("click", () => {
+        wrapper.classList.add("active");
+      });
+
+      signupHeader.addEventListener("click", () => {
+        wrapper.classList.remove("active");
+      });
+
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById("signup-name").value;
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+
+        // Simple validation - check if the email is unique
+        if (users.some((user) => user.email === email)) {
+          alert("Email already exists. Please choose another one.");
+        } else {
+          // Add the new user to the array
+          users.push({ fullName, email, password });
+          alert("Signup successful! Now you can login.");
+        }
+      });
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        // Check if the entered credentials match any user in the array
+        const matchedUser = users.find((user) => user.email === email && user.password === password);
+
+        if (matchedUser) {
+          alert("Login successful! Redirecting to the home page.");
+          // Redirect to the home page
+          window.location.href = "home.html";
+        } else {
+          alert("Invalid email or password");
+        }
+      });
+     
+    });
+  </script>
+</body>
+</html>
